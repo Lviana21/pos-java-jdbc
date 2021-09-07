@@ -2,7 +2,10 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import conexaojdbc.SingleConnection;
 import model.Userposjava;
@@ -19,7 +22,7 @@ public class UserPosDAO {
 	}
 
 	// Método Salvar recebe objeto Userposjava
-	public void salvar(Userposjava userposjava) {
+	public List<Userposjava> salvar(Userposjava userposjava) {
 		try {
 
 			String sql = "insert into userposjava (id, nome, email) values(?,?,?)";
@@ -28,7 +31,7 @@ public class UserPosDAO {
 			insert.setString(2, userposjava.getNome());
 			insert.setString(3, userposjava.getEmail());
 			insert.execute();
-			connection.commit();//salva no banco
+			connection.commit();// salva no banco
 
 		} catch (Exception e) {
 			try {
@@ -38,6 +41,51 @@ public class UserPosDAO {
 			}
 			e.printStackTrace();
 		}
+		return null;
 
 	}
+
+	//Lista de Objetos-------------------------------------------------------------------
+	public List<Userposjava> listar() throws Exception {
+		List<Userposjava> list = new ArrayList<Userposjava>();
+
+		String sql = "select * from userposjava";
+
+		PreparedStatement statement = connection.prepareStatement(sql);
+		ResultSet resultado = statement.executeQuery();
+
+		while (resultado.next()) {// enquanto for "true" tiver dados
+			Userposjava userposjava = new Userposjava();
+			userposjava.setId(resultado.getLong("id"));
+			userposjava.setNome(resultado.getString("nome"));
+			userposjava.setEmail(resultado.getString("email"));
+
+			list.add(userposjava);
+		}
+
+		return list;
+	}
+
+	//Consutar somente 1 Objeto----------------------------------------------------------------
+	    //buscar() não retorna uma lista, apenas um objeto
+		public Userposjava buscar(Long id) throws Exception {
+			Userposjava retorno = new Userposjava();
+
+			String sql = "select * from userposjava where id = " + id;
+
+			PreparedStatement statement = connection.prepareStatement(sql);
+			ResultSet resultado = statement.executeQuery();
+
+			while (resultado.next()) {// retorna apenas um ou nenhun
+				
+				retorno.setId(resultado.getLong("id"));
+				retorno.setNome(resultado.getString("nome"));
+				retorno.setEmail(resultado.getString("email"));
+
+				
+			}
+
+			return retorno;
+		}
+	
 }
