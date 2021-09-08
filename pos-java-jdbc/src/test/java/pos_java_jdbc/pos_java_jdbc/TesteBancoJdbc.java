@@ -11,40 +11,41 @@ import model.Userposjava;
 
 public class TesteBancoJdbc {
 
+	// Método de inserir dados "INSERT"
 	@Test
 	public void initBanco() throws SQLException {
-		//SingleConnection.getConnection();
+		// SingleConnection.getConnection();
 		UserPosDAO userPosDao = new UserPosDAO();
 		Userposjava userposjava = new Userposjava();
-		
-		//Teste dados dinâmicos
-		userposjava.setId(10L);
-		userposjava.setNome("Laura teste DAO");
-		userposjava.setEmail("lauratestedao@gmail.com");
-		
+
+		// Teste dados dinâmicos
+		userposjava.setNome("Lucas teste id");
+		userposjava.setEmail("lucastesteid@gmail.com");
+
 		userPosDao.salvar(userposjava);
 	}
-	
-	//método
+
+	// Método de consulta de todos os dados da tabela "SELECT"
 	@Test
 	public void initListar() {
 		UserPosDAO dao = new UserPosDAO();
 		try {
 			List<Userposjava> list = dao.listar();
-			
+
 			for (Userposjava userposjava : list) {
 				System.out.println(userposjava);
 				System.out.println("-----------------------------------");
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
+	// Método de consulta por ID "SELECT WHERE"
 	@Test
 	public void initBuscar() {
-		
+
 		UserPosDAO dao = new UserPosDAO();
 
 		try {
@@ -54,6 +55,37 @@ public class TesteBancoJdbc {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+	}
+
+	// Método atualizar "UPDATE"
+	@Test
+	public void initAtualizar() {
+		try {
+
+			UserPosDAO dao = new UserPosDAO();
+			Userposjava objetoBanco = dao.buscar(5L);
+			objetoBanco.setNome("Nome mudado com o método atualizar");
+			dao.atualizar(objetoBanco);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	//Método Deletar "DELETE"
+	@Test
+	public void initDeletar() {
+		
+		try {
+			
+			UserPosDAO dao = new UserPosDAO();
+			dao.deletar(11L);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
+	
+	
 }
