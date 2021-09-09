@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import conexaojdbc.SingleConnection;
 import dao.UserPosDAO;
+import model.Telefone;
 import model.Userposjava;
 
 public class TesteBancoJdbc {
@@ -86,6 +87,33 @@ public class TesteBancoJdbc {
 		}
 		
 	}
+	
+	
+	//##TABELA TELEFONE---------------------------------------------------------------------------------------------------
+	
+	@Test
+	public void testeInsertTelefene() {
+		
+		Telefone telefone = new Telefone();
+		telefone.setNumero("(64)9777-1060");
+		telefone.setTipo("Trabalho");
+		telefone.setUsuario(13L);
+		
+		UserPosDAO dao = new UserPosDAO();
+		dao.salvarTelefone(telefone);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }
