@@ -21,8 +21,8 @@ public class TesteBancoJdbc {
 		Userposjava userposjava = new Userposjava();
 
 		// Teste dados dinâmicos
-		userposjava.setNome("Lucas teste id");
-		userposjava.setEmail("lucastesteid@gmail.com");
+		userposjava.setNome("Patricía Marques");
+		userposjava.setEmail("patriciamarques@gmail.com");
 
 		userPosDao.salvar(userposjava);
 	}
@@ -54,7 +54,6 @@ public class TesteBancoJdbc {
 			Userposjava userposjava = dao.buscar(6L);
 			System.out.println(userposjava);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -66,7 +65,7 @@ public class TesteBancoJdbc {
 		try {
 
 			UserPosDAO dao = new UserPosDAO();
-			Userposjava objetoBanco = dao.buscar(5L);
+			Userposjava objetoBanco = dao.buscar(20L);
 			objetoBanco.setNome("Nome mudado com o método atualizar");
 			dao.atualizar(objetoBanco);
 
@@ -82,7 +81,7 @@ public class TesteBancoJdbc {
 		try {
 			
 			UserPosDAO dao = new UserPosDAO();
-			dao.deletar(11L);
+			dao.deletar(20L);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -96,9 +95,9 @@ public class TesteBancoJdbc {
 	public void testeInsertTelefene() {
 		
 		Telefone telefone = new Telefone();
-		telefone.setNumero("(64)9777-1060");
-		telefone.setTipo("Trabalho");
-		telefone.setUsuario(13L);
+		telefone.setNumero("(34)9985-1045");
+		telefone.setTipo("Celular");
+		telefone.setUsuario(19L);
 		
 		UserPosDAO dao = new UserPosDAO();
 		dao.salvarTelefone(telefone);
@@ -110,7 +109,7 @@ public class TesteBancoJdbc {
 		
 		UserPosDAO dao = new UserPosDAO();
 		
-		List<BeanUserFone> beanUserFones = dao.listaUserFone(13L);
+		List<BeanUserFone> beanUserFones = dao.listaUserFone(18L);
 		
 		for (BeanUserFone beanUserFone : beanUserFones) {
 			System.out.println(beanUserFone);

@@ -12,13 +12,13 @@ import model.BeanUserFone;
 import model.Telefone;
 import model.Userposjava;
 
-//## DAO - Obeto de acesso a dados
+//## DAO - Objeto de acesso a dados
 public class UserPosDAO {
 
 	// Connection do SQL
 	private Connection connection;
 
-	// Construtur para enjetar SingleConnection
+	// Construtor para enjetar SingleConnection
 	public UserPosDAO() {
 		connection = SingleConnection.getConnection();
 	}
